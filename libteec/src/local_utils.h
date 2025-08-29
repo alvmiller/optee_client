@@ -3,6 +3,7 @@
 #ifndef LIBTEEC_LOCAL_UTILS_H
 #define LIBTEEC_LOCAL_UTILS_H
 
+#ifndef MIN
 #define MIN(x, y) \
 	({ \
 		typeof(x) _x = (x); \
@@ -10,5 +11,6 @@
 		(void)(&_x == &_y); \
 		_x < _y ? _x : _y; \
 	})
+#endif
 
 #endif /*LIBTEEC_LOCAL_UTILS_H*/
