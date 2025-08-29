@@ -36,7 +36,7 @@
 
 #include "teec_trace.h"
 
-#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+#include "local_utils.h"
 
 /*
  * The length of the prefix is 37, for example it looks like this:
@@ -127,7 +127,7 @@ void dump_buffer(const char *bname, const uint8_t *buffer, size_t blen)
 
 		fprintf(stderr, "|\n");
 
-		blen -= MIN(blen, 16);
+        blen -= MIN(blen, (size_t)16);
 		buffer += 16;
 	}
 }
