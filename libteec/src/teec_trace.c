@@ -127,7 +127,7 @@ void dump_buffer(const char *bname, const uint8_t *buffer, size_t blen)
 
 		fprintf(stderr, "|\n");
 
-        blen -= MIN(blen, (size_t)16);
+		blen -= MIN(blen, (size_t)16);
 		buffer += 16;
 	}
 }
