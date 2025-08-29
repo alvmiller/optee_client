@@ -46,7 +46,7 @@
 #endif
 #include <linux/tee.h>
 
-#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+#include "local_utils.h"
 
 /* How many device sequence numbers will be tried before giving up */
 #define TEEC_MAX_DEV_SEQ	10
@@ -402,7 +402,7 @@ static void teec_post_process_tmpref(uint32_t param_type,
 	if (param_type != TEEC_MEMREF_TEMP_INPUT) {
 		if (tmpref->buffer && shm->imp.shadow_buffer)
 			memcpy(tmpref->buffer, shm->imp.shadow_buffer,
-			       MIN(MEMREF_SIZE(param), tmpref->size));
+                   MIN((size_t)MEMREF_SIZE(param), tmpref->size));
 
 		tmpref->size = MEMREF_SIZE(param);
 	}
