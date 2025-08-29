@@ -6,7 +6,15 @@
 #ifndef LIBCKTEEC_LOCAL_UTILS_H
 #define LIBCKTEEC_LOCAL_UTILS_H
 
-#define ARRAY_SIZE(array)	(sizeof(array) / sizeof(array[0]))
+#define BUILD_BUG_ON_ZERO(e) \
+    (sizeof(struct { int:-!!(e)*1234; }))
+#define SAME_TYPE(a, b) \
+    __builtin_types_compatible_p(typeof(a), typeof(b))
+#define MUST_BE_ARRAY(array) \
+    BUILD_BUG_ON_ZERO(SAME_TYPE((array), &(*array)))
+
+#define ARRAY_SIZE(array) ( \
+    (sizeof(array) / sizeof(*array)) + MUST_BE_ARRAY(array))
 
 #define COMPILE_TIME_ASSERT(x) \
 	do { \
